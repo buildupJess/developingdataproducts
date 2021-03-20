@@ -1,0 +1,32 @@
+---
+title: "When Zürich, Switzerland was Home"
+author: "J.Erickson"
+date: "3/19/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(leaflet)
+```
+
+```{r map}
+df <- data.frame(lat = c(47.383534, 47.404033, 47.402348, 47.414555, 47.411592, 47.378047,
+                         47.462544), 
+                 lng = c(8.499476, 8.557713, 8.535145, 8.558370, 8.544092, 8.540333, 
+                         8.553074),
+                 names = c("#1-Freihofstrasse", "#2-Waldgarten", "#3-Radiostudio",
+                           "#4-Riedbach", "Bahnhof Oerlikon", "Zürich Hauptbahnhof", "Flughafen Zürich"), 
+                 type = factor(c("house", "house", "house", "house", "train", "train", "plane")), 
+                 ZVV = c(
+                   "<a href='http://online.fahrplaninfo.zvv.ch/storage/pdf/j21/01/ah_01002U/ah_01002U_j21_a_00883.pdf'>Tram 2 Schedule</a>", "<a href= 'http://online.fahrplaninfo.zvv.ch/storage/pdf/j21/01/ah_01009U/ah_01009U_j21_a_02814.pdf'>Tram 9 Schedule</a>", "<a href= 'http://online.fahrplaninfo.zvv.ch/storage/pdf/j21/01/ah_01011U/ah_01011U_j21_a_02017.pdf'>Tram 11 Schedule</a>", "<a href= 'http://online.fahrplaninfo.zvv.ch/storage/pdf/j21/31/ah_31781A/ah_31781A_j21_a_02067.pdf'>Bus 781 Schedule</a>", "<a href= 'http://online.fahrplaninfo.zvv.ch/storage/pdf/j21/01/ah_01010U/ah_01010U_j21_a_03034.pdf'>Tram 10 Schedule</a>", "<a href= 'http://online.fahrplaninfo.zvv.ch/storage/pdf/j21/01/ah_01014U/ah_01014U_j21_b_00412.pdf'>Tram 14 Schedule</a>", "<a href= 'http://online.fahrplaninfo.zvv.ch/storage/pdf/j21/01/ah_01010U/ah_01010U_j21_a_03027.pdf'>Tram 10 Schedule</a>"))
+
+zurichIcons <- iconList(house= makeIcon(iconUrl="http://www.flaticon.com/svg/vstatic/svg/25/25694.svg?token=exp=1616218505~hmac=140ef9d9c930eb2bc39896995af325b6", iconWidth=31*215/230, iconHeight=31, iconAnchorX=31*215/230/2, iconAnchorY=16),
+                        train = makeIcon(iconUrl="http://www.flaticon.com/svg/vstatic/svg/66/66273.svg?token=exp=1616221551~hmac=f0a2af0127dba8d7bc56a7a32c7422d2", iconWidth=31*215/230, iconHeight=31, iconAnchorX=31*215/230/2, iconAnchorY=16),
+                        plane = makeIcon(iconUrl="http://www.flaticon.com/svg/vstatic/svg/61/61212.svg?token=exp=1616221616~hmac=e1683e5ae189856ed8da292ccdc79444", iconWidth=31*215/230, iconHeight=31, iconAnchorX=31*215/230/2, iconAnchorY=16))
+
+df %>%
+  leaflet() %>%
+  addTiles() %>% 
+  addMarkers(~lng, ~lat, label = df$names, popup = df$ZVV, popupOptions(maxWidth=100, maxHeight=50, keepInView = TRUE), icon=~zurichIcons[type])
+```
