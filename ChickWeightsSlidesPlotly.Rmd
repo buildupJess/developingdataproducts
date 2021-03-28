@@ -1,0 +1,32 @@
+---
+title: "Chick Weights Presentation"
+author: "J.Erickson"
+date: "3/27/2021"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+library(plotly)
+```
+
+## Interactive Plot
+
+Chicks were weighed every second day for 21 days. As the time period increases, the marker grows larger.
+
+```{r plotly}
+data("ChickWeight")
+fig <- plot_ly(ChickWeight, x = ~Chick, y = ~weight, type = "scatter", mode = "markers", color = ~factor(Diet), size = ~Time)
+fig <- fig %>% layout(
+    xaxis = list(title = "Chick ID"),
+    yaxis = list(title = "Weight (grams)")
+    )
+fig <- fig %>% layout(legend=list(title=list(text='<b> Diets </b>')))
+fig
+```
+
+## Thank You
+
+Thank you for viewing my presentation!
+
+
