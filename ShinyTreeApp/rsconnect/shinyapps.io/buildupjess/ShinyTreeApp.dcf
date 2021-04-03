@@ -1,0 +1,13 @@
+name: ShinyTreeApp
+title: ShinyTreeApp
+username:
+account: buildupjess
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3904907
+bundleId: 4426442
+url: https://buildupjess.shinyapps.io/ShinyTreeApp/
+when: 1617431210.57308
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .Rapp.history
