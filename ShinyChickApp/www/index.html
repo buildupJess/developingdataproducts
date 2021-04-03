@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <script type="application/shiny-singletons"></script>
+  <script type="application/html-dependencies">jquery[3.5.1];shiny-css[1.6.0];shiny-javascript[1.6.0];selectize[0.12.4];ionrangeslider-javascript[2.3.1];strftime[0.9.2];ionrangeslider-css[2.3.1];bootstrap[3.4.1]</script>
+<script src="shared/jquery.min.js"></script>
+<link href="shared/shiny.min.css" rel="stylesheet" />
+<script src="shared/shiny.min.js"></script>
+<link href="shared/selectize/css/selectize.bootstrap3.css" rel="stylesheet" />
+<script src="shared/selectize/js/selectize.min.js"></script>
+<script src="shared/selectize/accessibility/js/selectize-plugin-a11y.min.js"></script>
+<script src="shared/ionrangeslider/js/ion.rangeSlider.min.js"></script>
+<script src="shared/strftime/strftime-min.js"></script>
+<link href="shared/ionrangeslider/css/ion.rangeSlider.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="shared/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="shared/bootstrap/accessibility/css/bootstrap-accessibility.min.css" rel="stylesheet" />
+<script src="shared/bootstrap/js/bootstrap.min.js"></script>
+<script src="shared/bootstrap/accessibility/js/bootstrap-accessibility.min.js"></script>  <title>Loblolly Tree Predictions</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <h2>Loblolly Tree Predictions</h2>
+    <div class="row">
+      <div class="col-sm-4">
+        <form class="well" role="complementary">
+          <span class="help-block">Predict a Loblolly Tree's height or age</span>
+          <div class="form-group shiny-input-container">
+            <label class="control-label" id="selection-label" for="selection">Choose a variable to predict on</label>
+            <div>
+              <select id="selection"><option value="Age">Age</option>
+<option value="Height" selected>Height</option></select>
+              <script type="application/json" data-for="selection" data-nonempty="">{"plugins":["selectize-plugin-a11y"]}</script>
+            </div>
+          </div>
+          <div class="well">
+            <div data-display-if="input.selection == &#39;Height&#39;" data-ns-prefix="">
+              <div class="form-group shiny-input-container">
+                <label class="control-label" id="sliderHeight-label" for="sliderHeight">What is the height (ft) of the Loblolly tree?</label>
+                <input class="js-range-slider" id="sliderHeight" data-skin="shiny" data-min="1" data-max="70" data-from="30" data-step="1" data-grid="true" data-grid-num="9.85714285714286" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
+              </div>
+            </div>
+            <div data-display-if="input.selection == &#39;Age&#39;" data-ns-prefix="">
+              <div class="form-group shiny-input-container">
+                <label class="control-label" id="sliderAge-label" for="sliderAge">What is the age (years) of the Loblolly tree?</label>
+                <input class="js-range-slider" id="sliderAge" data-skin="shiny" data-min="1" data-max="25" data-from="10" data-step="1" data-grid="true" data-grid-num="8" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-keyboard="true" data-data-type="number"/>
+              </div>
+            </div>
+          </div>
+          <div class="form-group shiny-input-container">
+            <div class="checkbox">
+              <label>
+                <input id="showModel" type="checkbox" checked="checked"/>
+                <span>Show Model</span>
+              </label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-8" role="main">
+        <div class="tabbable">
+          <ul class="nav nav-tabs" data-tabsetid="6424">
+            <li class="active">
+              <a href="#tab-6424-1" data-toggle="tab" data-value="Documentation">Documentation</a>
+            </li>
+            <li>
+              <a href="#tab-6424-2" data-toggle="tab" data-value="Plot">Plot</a>
+            </li>
+          </ul>
+          <div class="tab-content" data-tabsetid="6424">
+            <div class="tab-pane active" data-value="Documentation" id="tab-6424-1">
+              <br/>
+              <div id="out1" class="shiny-text-output"></div>
+            </div>
+            <div class="tab-pane" data-value="Plot" id="tab-6424-2">
+              <br/>
+              <div id="plot1" class="shiny-plot-output" style="width:100%;height:400px;"></div>
+              <div data-display-if="input.selection == &#39;Age&#39;" data-ns-prefix="">
+                <h3>Predicted height (ft) from Model:</h3>
+              </div>
+              <div data-display-if="input.selection == &#39;Height&#39;" data-ns-prefix="">
+                <h3>Predicted age (years) from Model</h3>
+              </div>
+              <div id="modelPred" class="shiny-text-output"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
